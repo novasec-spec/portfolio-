@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>UGC Portfolio · Creator</title>
+  <!-- Google Fonts for modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <!-- Font Awesome for clean icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafc;
+      color: #1e1e2f;
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    /* modern gradient background accents */
+    .bg-glow {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 80% 20%, rgba(98, 0, 255, 0.05), transparent 40%),
+                  radial-gradient(circle at 20% 80%, rgba(255, 100, 150, 0.05), transparent 40%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2rem 1.5rem;
+    }
+
+    /* HEADER / HERO */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 2rem;
+      margin-bottom: 4rem;
+      animation: fadeUp 0.8s ease-out;
+    }
+
+    .hero-content {
+      flex: 1 1 300px;
+    }
+
+    .badge {
+      display: inline-block;
+      background: rgba(98, 0, 255, 0.1);
+      color: #6200ff;
+      font-weight: 600;
+      font-size: 0.85rem;
+      padding: 0.35rem 1rem;
+      border-radius: 100px;
+      letter-spacing: 0.02em;
+      margin-bottom: 1.2rem;
+      border: 1px solid rgba(98, 0, 255, 0.2);
+      backdrop-filter: blur(4px);
+    }
+
+    h1 {
+      font-size: clamp(2.4rem, 6vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 1rem;
+    }
+
+    .highlight {
+      background: linear-gradient(135deg, #6200ff 0%, #b300ff 80%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: #4a4a5e;
+      max-width: 500px;
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.9rem 1.8rem;
+      border-radius: 60px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      font-size: 1rem;
+      border: 1px solid transparent;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: #1e1e2f;
+      color: white;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+    }
+
+    .btn-primary:hover {
+      background: #2d2d44;
+      transform: translateY(-3px);
+      box-shadow: 0 15px 25px -8px rgba(0,0,0,0.2);
+    }
+
+    .btn-outline {
+      background: transparent;
+      border-color: #d0d0e0;
+      color: #1e1e2f;
+    }
+
+    .btn-outline:hover {
+      background: white;
+      border-color: #6200ff;
+      color: #6200ff;
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px -10px rgba(98, 0, 255, 0.2);
+    }
+
+    .hero-visual {
+      flex: 1 1 280px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+    }
+
+    .avatar-card {
+      background: white;
+      border-radius: 40px;
+      padding: 1.2rem;
+      box-shadow: 0 25px 40px -15px rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255,255,255,0.5);
+      backdrop-filter: blur(10px);
+      transform: rotate(2deg);
+      transition: transform 0.3s ease;
+      max-width: 280px;
+      width: 100%;
+    }
+
+    .avatar-card:hover {
+      transform: rotate(0deg) scale(1.02);
+    }
+
+    .avatar-img {
+      width: 100%;
+      aspect-ratio: 1/1;
+      border-radius: 30px;
+      background: linear-gradient(145deg, #6200ff, #b300ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 5rem;
+      font-weight: 700;
+      box-shadow: inset 0 0 20px rgba(0,0,0,0.1);
+    }
+
+    .avatar-stats {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 1rem;
+      padding: 0.5rem 0.2rem;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-number {
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: #1e1e2f;
+    }
+
+    .stat-label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: #777;
+      font-weight: 500;
+    }
+
+    /* SECTION TITLES */
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    .section-title i {
+      color: #6200ff;
+      font-size: 1.8rem;
+    }
+
+    /* CONTENT CARDS */
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.8rem;
+      margin-bottom: 4rem;
+    }
+
+    .card {
+      background: white;
+      border-radius: 30px;
+      padding: 1.8rem;
+      box-shadow: 0 10px 20px -8px rgba(0,0,0,0.05);
+      border: 1px solid #eeeef5;
+      transition: all 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 25px 30px -12px rgba(98, 0, 255, 0.15);
+      border-color: rgba(98, 0, 255, 0.2);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      color: #6200ff;
+      margin-bottom: 1rem;
+      background: rgba(98, 0, 255, 0.08);
+      width: 55px;
+      height: 55px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 18px;
+    }
+
+    .card h3 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .card p {
+      color: #5c5c72;
+      font-size: 0.95rem;
+    }
+
+    /* PORTFOLIO / WORK SAMPLES */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 4rem;
+    }
+
+    .portfolio-item {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.02);
+      border: 1px solid #eeeef5;
+      transition: all 0.25s ease;
+    }
+
+    .portfolio-item:hover {
+      transform: translateY(-4px);
+      border-color: rgba(98, 0, 255, 0.3);
+      box-shadow: 0 20px 25px -12px rgba(98, 0, 255, 0.15);
+    }
+
+    .portfolio-thumb {
+      height: 160px;
+      background: linear-gradient(145deg, #e9e0ff, #d9c6ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #6200ff;
+      font-size: 2.8rem;
+      position: relative;
+    }
+
+    .brand-tag {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: white;
+      padding: 0.2rem 0.8rem;
+      border-radius: 40px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      color: #1e1e2f;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    }
+
+    .portfolio-info {
+      padding: 1.2rem 1.2rem 1.5rem;
+    }
+
+    .portfolio-info h4 {
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.25rem;
+    }
+
+    .portfolio-info .meta {
+      font-size: 0.8rem;
+      color: #777;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.9rem;
+    }
+
+    .engagement {
+      display: flex;
+      gap: 0.8rem;
+      font-size: 0.8rem;
+      color: #4a4a5e;
+    }
+
+    .engagement i {
+      color: #6200ff;
+      margin-right: 0.2rem;
+    }
+
+    /* SKILLS / EXPERIENCE */
+    .skills-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      margin-bottom: 4rem;
+    }
+
+    .skill-pill {
+      background: white;
+      border: 1px solid #e0e0f0;
+      padding: 0.55rem 1.2rem;
+      border-radius: 60px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      color: #1e1e2f;
+      transition: all 0.15s ease;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .skill-pill i {
+      color: #6200ff;
+      font-size: 0.9rem;
+    }
+
+    .skill-pill:hover {
+      background: #6200ff;
+      color: white;
+      border-color: #6200ff;
+    }
+
+    .skill-pill:hover i {
+      color: white;
+    }
+
+    /* TESTIMONIAL / QUOTE */
+    .quote-block {
+      background: #1e1e2f;
+      color: white;
+      padding: 2.5rem;
+      border-radius: 40px;
+      margin-bottom: 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .quote-block::after {
+      content: '"';
+      position: absolute;
+      bottom: -40px;
+      right: 20px;
+      font-size: 15rem;
+      font-weight: 800;
+      color: rgba(255,255,255,0.03);
+      line-height: 1;
+      pointer-events: none;
+    }
+
+    .quote-text {
+      font-size: 1.4rem;
+      font-weight: 500;
+      line-height: 1.5;
+      margin-bottom: 1.8rem;
+      position: relative;
+      z-index: 2;
+      letter-spacing: -0.01em;
+    }
+
+    .quote-author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: #6200ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.2rem;
+    }
+
+    .author-info p {
+      font-weight: 600;
+    }
+
+    .author-info span {
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    /* CONTACT / CTA */
+    .contact-section {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      background: white;
+      border-radius: 60px;
+      padding: 2rem 2.5rem;
+      box-shadow: 0 10px 30px -8px rgba(0,0,0,0.05);
+      border: 1px solid #eeeef5;
+      margin-top: 2rem;
+    }
+
+    .contact-section h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .contact-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-up {
+      animation: fadeUp 0.7s ease-out forwards;
+    }
+
+    .delay-1 { animation-delay: 0.1s; }
+    .delay-2 { animation-delay: 0.2s; }
+    .delay-3 { animation-delay: 0.3s; }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 2.5rem 0 1.5rem;
+      color: #8a8a9e;
+      font-size: 0.85rem;
+      border-top: 1px solid #eaeaf2;
+      margin-top: 3rem;
+    }
+
+    /* responsive adjustments */
+    @media (max-width: 600px) {
+      .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      .hero p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .cta-group {
+        justify-content: center;
+      }
+      .avatar-card {
+        max-width: 220px;
+      }
+      .section-title {
+        justify-content: center;
+      }
+      .contact-section {
+        flex-direction: column;
+        gap: 1.5rem;
+        text-align: center;
+        border-radius: 40px;
+      }
+      .quote-text {
+        font-size: 1.2rem;
+      }
+    }
+
+    /* utility */
+    .mt-2 { margin-top: 2rem; }
+    .text-center { text-align: center; }
+  </style>
+</head>
+<body>
+  <div class="bg-glow"></div>
+
+  <div class="container">
+    <!-- HERO SECTION -->
+    <header class="hero">
+      <div class="hero-content">
+        <div class="badge"><i class="fas fa-bolt" style="margin-right: 6px;"></i> UGC Creator · Portfolio 2025</div>
+        <h1>Hi, I'm <span class="highlight">John Munga</span><br>I create content that <span class="highlight">converts</span>.</h1>
+        <p>UGC creator with 3+ years of experience producing authentic, high-engagement content for DTC brands. Let's make your product go viral.</p>
+        <div class="cta-group">
+          <a href="#portfolio" class="btn btn-primary"><i class="fas fa-play"></i> View work</a>
+          <a href="#contact" class="btn btn-outline"><i class="fas fa-paper-plane"></i> Hire me</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="avatar-card">
+          <div class="avatar-img">JM</div>
+          <div class="avatar-stats">
+            <div class="stat-item">
+              <div class="stat-number">120+</div>
+              <div class="stat-label">Projects</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">4.9M</div>
+              <div class="stat-label">Views</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-number">48</div>
+              <div class="stat-label">Brands</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- SERVICES / WHAT I DO -->
+    <section class="fade-up delay-1">
+      <h2 class="section-title"><i class="fas fa-camera"></i> What I bring to the table</h2>
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-video"></i></div>
+          <h3>UGC Videos</h3>
+          <p>Authentic product demos, unboxings, tutorials, and testimonials that feel native to the feed.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-image"></i></div>
+          <h3>Static Creatives</h3>
+          <p>Scroll-stopping photos and carousels designed for Instagram, TikTok, and Meta ads.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon"><i class="fas fa-chart-line"></i></div>
+          <h3>Performance Focus</h3>
+          <p>Content engineered for CTR, conversions, and brand lift — backed by analytics.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO / WORK SAMPLES -->
+    <section id="portfolio" class="fade-up delay-2">
+      <h2 class="section-title"><i class="fas fa-folder-open"></i> Recent work</h2>
+      <div class="portfolio-grid">
+        <div class="portfolio-item">
+          <div class="portfolio-thumb">
+            <span class="brand-tag">Glow Recipe</span>
+            <i class="fas fa-play-circle"></i>
+          </div>
+          <div class="portfolio-info">
+            <h4>Watermelon Glow Niacinamide</h4>
+            <div class="meta">
+              <span>UGC Video · TikTok</span>
+              <span>2.1M views</span>
+            </div>
+            <div class="engagement">
+              <span><i class="fas fa-heart"></i> 124K</span>
+              <span><i class="fas fa-comment"></i> 4.2K</span>
+              <span><i class="fas fa-share"></i> 8.1K</span>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-thumb">
+            <span class="brand-tag">Nike</span>
+            <i class="fas fa-shoe-prints"></i>
+          </div>
+          <div class="portfolio-info">
+            <h4>Air Max Campaign</h4>
+            <div class="meta">
+              <span>UGC Reel · Instagram</span>
+              <span>890K views</span>
+            </div>
+            <div class="engagement">
+              <span><i class="fas fa-heart"></i> 56K</span>
+              <span><i class="fas fa-comment"></i> 1.8K</span>
+              <span><i class="fas fa-share"></i> 3.2K</span>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-thumb">
+            <span class="brand-tag">HelloFresh</span>
+            <i class="fas fa-utensils"></i>
+          </div>
+          <div class="portfolio-info">
+            <h4>Unboxing & First Cook</h4>
+            <div class="meta">
+              <span>UGC Video · YouTube</span>
+              <span>1.3M views</span>
+            </div>
+            <div class="engagement">
+              <span><i class="fas fa-heart"></i> 89K</span>
+              <span><i class="fas fa-comment"></i> 3.1K</span>
+              <span><i class="fas fa-share"></i> 5.7K</span>
+            </div>
+          </div>
+        </div>
+        <div class="portfolio-item">
+          <div class="portfolio-thumb">
+            <span class="brand-tag">Sephora</span>
+            <i class="fas fa-star"></i>
+          </div>
+          <div class="portfolio-info">
+            <h4>Best of Skincare Haul</h4>
+            <div class="meta">
+              <span>Carousel · Instagram</span>
+              <span>670K reach</span>
+            </div>
+            <div class="engagement">
+              <span><i class="fas fa-heart"></i> 42K</span>
+              <span><i class="fas fa-comment"></i> 1.2K</span>
+              <span><i class="fas fa-share"></i> 2.4K</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SKILLS / EXPERIENCE -->
+    <section class="fade-up delay-3">
+      <h2 class="section-title"><i class="fas fa-tools"></i> Skills & tools</h2>
+      <div class="skills-wrapper">
+        <span class="skill-pill"><i class="fas fa-video"></i> Video Editing</span>
+        <span class="skill-pill"><i class="fas fa-camera"></i> Product Photography</span>
+        <span class="skill-pill"><i class="fas fa-pen-fancy"></i> Scriptwriting</span>
+        <span class="skill-pill"><i class="fas fa-chart-bar"></i> Performance Analysis</span>
+        <span class="skill-pill"><i class="fas fa-mobile-alt"></i> Short-Form Content</span>
+        <span class="skill-pill"><i class="fas fa-palette"></i> Adobe Premiere Pro</span>
+        <span class="skill-pill"><i class="fas fa-film"></i> CapCut</span>
+        <span class="skill-pill"><i class="fas fa-lightbulb"></i> Creative Direction</span>
+        <span class="skill-pill"><i class="fas fa-users"></i> Brand Collabs</span>
+      </div>
+    </section>
+
+    <!-- TESTIMONIAL -->
+    <div class="quote-block fade-up">
+      <div class="quote-text">
+        “John delivered UGC that outperformed our internal creative by 3x. The content felt genuine and our CTR skyrocketed. Already booked for next quarter.”
+      </div>
+      <div class="quote-author">
+        <div class="author-avatar">JD</div>
+        <div class="author-info">
+          <p>Jessica Diaz</p>
+          <span>Social Media Lead · Glow Recipe</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CONTACT / CTA -->
+    <div id="contact" class="contact-section fade-up">
+      <div>
+        <h2>Let's create something<br>that stands out.</h2>
+        <p style="color: #5c5c72; margin-top: 0.4rem; font-size: 0.95rem;">Available for UGC projects & retainers.</p>
+      </div>
+      <div class="contact-buttons">
+        <a href="mailto:technologiesnovasec@gmail.com" class="btn btn-primary"><i class="fas fa-envelope"></i> technologiesnovasec@gmail.com</a>
+        <a href="#" class="btn btn-outline" onclick="copyEmail(event)"><i class="fas fa-copy"></i> Copy email</a>
+      </div>
+    </div>
+
+    <footer>
+      <p>© 2026 John Munga · UGC Creator · Built for UGC Roster</p>
+      <p style="margin-top: 0.5rem; opacity: 0.7;"><i class="fas fa-map-pin"></i> Los Angeles, CA · Available worldwide (remote)</p>
+    </footer>
+  </div>
+
+  <script>
+    // simple interactive: copy email to clipboard with feedback
+    function copyEmail(event) {
+      event.preventDefault();
+      const email = 'alex@ugc.com';
+      navigator.clipboard.writeText(email).then(() => {
+        const btn = event.target.closest('.btn');
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+        setTimeout(() => {
+          btn.innerHTML = originalHTML;
+        }, 2000);
+      }).catch(() => {
+        alert('Press Ctrl+C to copy: ' + email);
+      });
+    }
+
+    // smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href === "#" || href === "") return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
